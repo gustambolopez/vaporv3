@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<!---------------------------!
+ ! i dont care if you take this skids
+ !---------------------------->
+
+<html>
+
+<head>
+  <title>New Tab</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3@main/scripts/opt.js"></script>
+  <style>
+    body {
+      font-family: 'Space Mono', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+      background: #0a111d;
+      color: white;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    #time {
+      font-size: 48px;
+      font-weight: 700;
+    }
+
+    .digit {
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+      height: 1.2em;
+      margin: 0;
+    }
+
+    .digit.colon {
+      margin: 0;
+    }
+
+    .digit-content {
+      display: block;
+      transition: transform 0.4s ease, opacity 0.4s ease-out;
+    }
+
+    .digit.changing .digit-content {
+      animation: slideup 0.4s ease forwards;
+    }
+
+    @keyframes slideup {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-80%);
+        opacity: 0;
+      }
+    }
+
+    .digit.changing::after {
+      content: attr(data-new);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      transform: translateY(80%);
+      opacity: 0;
+      animation: slideUpFadeIn 0.4s ease-out forwards;
+    }
+
+    @keyframes slideUpFadeIn {
+      0% {
+        transform: translateY(80%);
+        opacity: 0;
+      }
+
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="time"></div>
+  <script>
+    let previousTime = '';
+
+    function updateTime() {
+      const now = new Date();
+      const currentTime = now.toLocaleTimeString();
+
+      if (previousTime && previousTime !== currentTime) {
+        const timeElement = document.getElementById('time');
+        const newTimeChars = currentTime.split('');
+        const oldTimeChars = previousTime.split('');
+
+        timeElement.innerHTML = newTimeChars.map((char, index) => {
+          const isChanged = oldTimeChars[index] !== char;
+          const oldChar = oldTimeChars[index] || '';
+          const isColon = char === ':';
+
+          if (isChanged && !isColon) {
+            return `<span class="digit changing" data-new="${char}"><span class="digit-content">${oldChar}</span></span>`;
+          } else {
+            return `<span class="digit ${isColon ? 'colon' : ''}"><span class="digit-content">${char}</span></span>`;
+          }
+        }).join('');
+
+        setTimeout(() => {
+          timeElement.innerHTML = newTimeChars.map(char => {
+            const isColon = char === ':';
+            return `<span class="digit ${isColon ? 'colon' : ''}"><span class="digit-content">${char}</span></span>`;
+          }).join('');
+        }, 400);
+      } else {
+        const timeElement = document.getElementById('time');
+        timeElement.innerHTML = currentTime.split('').map(char => {
+          const isColon = char === ':';
+          return `<span class="digit ${isColon ? 'colon' : ''}"><span class="digit-content">${char}</span></span>`;
+        }).join('');
+      }
+
+      previousTime = currentTime;
+    }
+
+    updateTime();
+    setInterval(updateTime, 1000);
+  </script>
+</body>
+
+</html>

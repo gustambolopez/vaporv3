@@ -1,0 +1,253 @@
+/**
+* sidebar styles
+* these are the sidebar styles
+*/
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 65px;
+  background: var(--fourth-bg);
+  padding: 10px 0;
+  transition: 0.24s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 99;
+}
+
+.sidebar:hover {
+  width: 275px;
+  box-shadow: 5px 0px 20px rgba(0, 0, 0, 0.3);
+  background: var(--fourth-bg);
+}
+
+.nav-top,
+.nav-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 7.5px 12px;
+  text-decoration: none;
+  color: #fff;
+  transition: padding 0.27s ease, background-color 0.12s ease;
+  white-space: nowrap;
+  margin: 0 10px;
+  border-radius: 10px;
+}
+
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-item:hover .nav-text {
+  padding-left: 2px;
+}
+
+.sidebar:hover .nav-item {
+  padding: 7.5px 14.5px;
+}
+
+.nav-item.active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.nav-item.active .nav-text {
+  padding-left: 2px;
+}
+
+.icon-container {
+  width: 20px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  flex-shrink: 0;
+  font-size: 16.5px;
+  color: rgba(255, 255, 255, 0.8);
+  transition: 0.15s ease;
+  padding: 0;
+}
+
+.nav-text {
+  /*margin-left: 15px;*/
+  opacity: 0;
+  transition: all 0.27s ease, filter 0.27s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.sidebar:hover .nav-text {
+  opacity: 1;
+  filter: blur(0px);
+  color: #fff;
+}
+
+.sidebar:hover .icon-container {
+  color: #fff;
+}
+
+.quick-actions {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  padding: 0px 10px;
+  margin-bottom: 0px;
+  width: 100%;
+  transition: 0.27s ease;
+}
+
+.sidebar:hover .quick-actions {
+  margin-bottom: 5px;
+}
+
+.quick-action-btn {
+  width: 45px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  transition: 0.2s ease;
+  opacity: 0;
+  visibility: hidden;
+  flex-shrink: 0;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.quick-action-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 18.5px;
+}
+
+.sidebar:hover .quick-action-btn {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sidebar:not(:hover) .quick-action-btn {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6.5px);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.27s ease;
+  pointer-events: none;
+  z-index: 98;
+}
+
+.sidebar:hover+.overlay {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: none;
+}
+
+.nav-category-wrapper {
+  position: relative;
+  width: 100%;
+  transition: all 0.13s ease-in-out;
+}
+
+.nav-category {
+  cursor: pointer;
+}
+
+.chevron-icon {
+  transition: transform 0.09s ease-in-out, opacity 0.09s;
+  font-size: 16px;
+  margin-left: 0px;
+  vertical-align: middle;
+}
+
+.nav-category-wrapper.expanded .chevron-icon {
+  transform: rotate(180deg);
+}
+
+.nav-nested-list {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.11s ease-in-out, opacity 0.08s ease-in-out;
+  margin-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nav-nested-list.fade-in {
+  animation: fadeInNavNested 0.08s ease-in-out;
+}
+
+@keyframes fadeInNavNested {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nav-category-wrapper.expanded .nav-nested-list {
+  opacity: 1;
+}
+
+.nav-nested-item {
+  background: none !important;
+  margin-left: 0;
+  padding-left: 32px !important;
+  font-size: 0.98em;
+  border-radius: 8px;
+  transition: background 0.09s, color 0.09s, padding 0.09s ease-in-out;
+  opacity: 0;
+  animation: fadeInNavNested 0.08s ease-in-out forwards;
+  animation-delay: 0.02s;
+}
+
+.nav-nested-list .nav-nested-item {
+  opacity: 1;
+}
+
+.nav-nested-item:hover {
+  background: rgba(255, 255, 255, 0.07) !important;
+  color: #fff;
+}
+
+.nav-divider {
+  height: 1.5px;
+  background: rgba(255, 255, 255, 0.15);
+  margin: 8px 18px;
+  transition: 0.24s ease;
+  width: 235px;
+}
+
+.sidebar:not(:hover) .nav-divider {
+  width: 30px;
+  margin: 8px 18px;
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "super-mario-world",
+    "name": "Super Mario World",
+    "url": "https://glcdn.githack.com/technonyte00/vapor-emu-assets/-/raw/main/emu-html/SuperMarioWorld.html",
+    "img": "https://upload.wikimedia.org/wikipedia/en/3/32/Super_Mario_World_Coverart.png"
+  },
+  {
+    "id": "sonic-battle",
+    "name": "Sonic Battle",
+    "url": "https://glcdn.githack.com/technonyte00/vapor-emu-assets/-/raw/main/emu-html/SonicBattle.html",
+    "img": "https://www.lukiegames.com/assets/images/GBA/BoxScans/GBA_Sonic_Battle_Box.jpg"
+  },
+  {
+    "id": "pokemon-red",
+    "name": "Pokemon Red",
+    "url": "https://glcdn.githack.com/technonyte00/vapor-emu-assets/-/raw/main/emu-html/PokemonRed.html",
+    "img": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c9be30e5-5d79-4c7e-b734-3ce0a28bb294/d9tkrbj-4a89683f-65db-4e8c-ab91-0c3aaf63560f.png/v1/fill/w_894,h_894,q_70,strp/pokemon_red_version__game_boy__hq_box_art_by_jadelune_d9tkrbj-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9OTAwIiwicGF0aCI6IlwvZlwvYzliZTMwZTUtNWQ3OS00YzdlLWI3MzQtM2NlMGEyOGJiMjk0XC9kOXRrcmJqLTRhODk2ODNmLTY1ZGItNGU4Yy1hYjkxLTBjM2FhZjYzNTYwZi5wbmciLCJ3aWR0aCI6Ijw9OTAwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.Dzq2mUoMhDypY4LZzOg57_6tmJ-y87HFeAybaAYecHM"
+  },
+  {
+    "id": "mega-man-x",
+    "name": "Mega Man X",
+    "url": "https://glcdn.githack.com/technonyte00/vapor-emu-assets/-/raw/main/emu-html/MegaManX.html",
+    "img": "https://i.ebayimg.com/images/g/Cd4AAOSwt-NkbB8c/s-l1200.jpg"
+  },
+  {
+    "id": "donkey-kong-country",
+    "name": "Donkey Kong Country",
+    "url": "https://glcdn.githack.com/technonyte00/vapor-emu-assets/-/raw/main/emu-html/DonkeyKongCountry.html",
+    "img": "https://upload.wikimedia.org/wikipedia/en/1/1a/Donkey_Kong_Country_SNES_cover.png"
+  },
+  {
+    "id": "super-mario-64",
+    "name": "Super Mario 64",
+    "url": "https://glcdn.githack.com/technonyte00/vapor-emu-assets/-/raw/main/emu-html/SuperMario64.html",
+    "img": "https://i.ebayimg.com/images/g/h3cAAOSwRxNkYCy9/s-l1200.jpg"
+  },
+  {
+    "id": "animal-crossing-wild-world",
+    "name": "Animal Crossing: Wild World",
+    "url": "https://glcdn.githack.com/technonyte00/vapor-emu-assets/-/raw/main/emu-html/AnimalCrossingWildWorld.html",
+    "img": "https://images.nintendolife.com/7c7019468f7e0/wild-world.900x.jpg"
+  },
+  {
+    "id": "sonic-the-hedgehog",
+    "name": "Sonic the Hedgehog",
+    "url": "https://glcdn.githack.com/technonyte00/vapor-emu-assets/-/raw/main/emu-html/SonicTheHedgehog.html",
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRZJW99OGjs31KIQkip6CbyRQKl4EV8XlIUQ&s"
+  }
+]

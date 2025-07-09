@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3@main/styles/defaults.css" />
+  <script src="https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3@main/scripts/opt.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3@main
+  /scripts/theme.js"></script>
+  <style>
+    .title,
+    button {
+      color: var(--secondary-text-color);
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: Inter;
+    }
+
+    body,
+    html {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg);
+      color: rgba(255, 255, 255, 0.9);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .content-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 16px;
+      gap: 25px;
+    }
+
+    .left-container,
+    .right-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: var(--fourth-bg);
+      width: 35%;
+      border-radius: 12px;
+      padding: 24px;
+      text-align: left;
+      justify-content: space-between;
+      height: 80%;
+    }
+    
+    .right-container {
+        display: flex;
+        align-items: space-between;
+    }
+
+    .button-container,
+    .footer,
+    .session-status,
+    .status {
+      text-align: center;
+    }
+
+    .title {
+      font-size: 30px;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .body-text {
+      font-size: 16px;
+      color: var(--secondary-text-color);
+      margin-bottom: 20px;
+    }
+
+    .session-status {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--secondary-text-color);
+    }
+
+    .button-container {
+      width: 100%;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      background-color: #4c75f2;
+      border: none;
+      border-radius: 10px;
+      transition: 0.3s;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #3a5bc0;
+    }
+
+    button:disabled {
+      background-color: rgba(255, 255, 255, 0.2);
+      cursor: not-allowed;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    #createSession {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 600;
+      padding: 5px;
+      background: linear-gradient(45deg, #6366f1, #8fd7eb, #6366f1);
+      background-size: 400% 400%;
+      animation: gradientBg 3s linear infinite;
+      position: relative;
+      overflow: hidden;
+      background-clip: padding-box;
+      box-shadow: 0 0 10px rgba(99, 102, 241, 0.5), 0 0 20px rgba(143, 215, 235, 0.3);
+    }
+
+    #createSession div {
+      background: #263143;
+      width: 100%;
+      height: 100%;
+      padding: 20px 36px;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    #createSession span {
+      background: linear-gradient(45deg, #6366f1, #8fd7eb, #6366f1);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientText 3s linear infinite;
+    }
+
+    #createSession:hover {
+      box-shadow: 0 0 30px rgba(99, 102, 241, 0.5), 0 0 60px rgba(143, 215, 235, 0.3);
+      transform: scale(1.02);
+    }
+
+    #createSession:active {
+      transform: scale(0.98);
+    }
+
+
+    #createSession:hover div {
+      background: #26314300;
+    }
+
+    #createSession:hover span {
+      -webkit-text-fill-color: white;
+      color: white;
+    }
+
+    @keyframes gradientText {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      100% {
+        background-position: 400% 50%;
+      }
+    }
+
+    @keyframes gradientBg {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      100% {
+        background-position: 400% 50%;
+      }
+    }
+
+    .vm-session-container {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: var(--bg);
+      z-index: 1;
+    }
+
+    .vm-controls-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      min-height: 60px;
+    }
+
+    .vm-left-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .vm-right-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .hyperbeam-container {
+      flex: 1;
+      width: 100%;
+      background-color: #1a1a1a;
+      overflow: hidden;
+    }
+
+    .end-session-btn,
+    .close-tabs-btn,
+    .timer {
+      color: rgba(255, 255, 255, 0.9);
+      background-color: rgba(255, 255, 255, 0.08);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      border: none;
+      font-family: inherit;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .end-session-btn:hover {
+      background-color: rgba(255, 107, 107, 0.2);
+    }
+
+    .close-tabs-btn:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .timer {
+      cursor: default;
+      font-weight: 500;
+    }
+
+    .countdown {
+      font-weight: 700;
+      color: #4c75f2;
+    }
+
+    .status {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 12px 16px;
+      color: rgba(255, 255, 255, 0.9);
+      background-color: rgba(255, 255, 255, 0.08);
+      max-width: 320px;
+      z-index: 100;
+      border-radius: 10px;
+      backdrop-filter: blur(4px);
+      display: none;
+    }
+
+    .footer {
+      margin-top: 16px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.5);
+      bottom: 8px;
+    }
+
+    .footer-image {
+      margin-top: auto;
+      text-align: center;
+      padding-top: 20px;
+    }
+
+    .footer-image img {
+      width: 100%;
+      border-radius: 4px;
+      filter: brightness(0.9);
+    }
+
+    .loading-icon {
+      animation: 1s linear infinite spin;
+      margin-right: 4px;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    
+
+    .connection-status {
+      display: none !important;
+    }
+
+    .hyperbeam-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #0a111d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      gap: 12px;
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .hyperbeam-overlay .loading-spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-top: 2px solid #4c75f2;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content-container" id="introContainer">
+    <div class="left-container">
+      <div class="title">VAPOR Private VMs</div>
+      <div class="body-text">
+        VAPOR Private VMs are isolated, personal browsers available in the
+        cloud.<br /><br />Need to search something? Need to test a sketchy
+        site? Try Private VMs.<br /><br />12 minutes of uninterrupted
+        browsing. Ran out of time? In a single click, create a new session
+        right away.
+      </div>
+      <div class="footer-image">
+        <img src="https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3@main/_a/img/priv-vm-snapshot.png" alt="Screenshot of the browser." />
+      </div>
+    </div>
+
+    <div class="right-container">
+      <div class="button-container">
+        <button id="createSession">
+          <div>
+            <span><i class="fa-regular fa-desktop" style="margin-right: 5px"></i>
+              Start Session</span>
+          </div>
+        </button>
+      </div>
+      <script type="text/javascript">
+	atOptions = {
+		'key' : '286a70d6a6da59128b6e3086dfaa5835',
+		'format' : 'iframe',
+		'height' : 250,
+		'width' : 300,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/286a70d6a6da59128b6e3086dfaa5835/invoke.js"></script>
+    </div>
+  </div>
+
+  <!-- the sesh container  -->
+  <div id="vmSessionContainer" class="vm-session-container">
+    <div class="vm-controls-bar">
+      <div class="vm-left-controls">
+        <button id="endSessionBtn" class="end-session-btn">
+          <i class="fa-regular fa-stop-circle"></i> End Session
+        </button>
+        <button id="closeTabsBtn" class="close-tabs-btn">
+          <i class="fas fa-times"></i> Close All Tabs
+        </button>
+      </div>
+      <div class="vm-right-controls">
+        <div id="timer" class="timer">
+          <i class="fas fa-clock"></i> Time left:
+          <span id="countdown" class="countdown">30</span>s
+        </div>
+      </div>
+    </div>
+    <div id="hyperbeamContainer" class="hyperbeam-container"></div>
+  </div>
+
+  <div id="status" class="status"></div>
+  <div id="loadingOverlay" class="hyperbeam-overlay" style="display: none;"></div>
+  <div id="connectionStatus" class="connection-status"></div>
+
+  <script type="module">
+    // no external cdns L
+    import Hyperbeam from "https://vapor.my/v0/vm/index.js";
+
+    const createSessionBtn = document.getElementById("createSession");
+    const vmSessionContainer = document.getElementById("vmSessionContainer");
+    const hyperbeamContainer = document.getElementById("hyperbeamContainer");
+    const timer = document.getElementById("timer");
+    const countdown = document.getElementById("countdown");
+    const status = document.getElementById("status");
+    const endSessionBtn = document.getElementById("endSessionBtn");
+    const closeTabsBtn = document.getElementById("closeTabsBtn");
+    const connectionStatus = document.getElementById("connectionStatus");
+    const loadingOverlay = document.getElementById("loadingOverlay");
+    const API_URL = "https://vapor.my" ;
+
+    let countdownInterval;
+    let currentSessionId = null;
+    let isTerminating = false;
+    let hyperbeamInstance = null;
+    let adminToken = null;
+    let csrfToken = null;
+
+    async function getCSRFToken() {
+      try {
+        const response = await fetch(`${API_URL}/v0/vm/csrf-token`);
+        const data = await response.json();
+        csrfToken = data.csrfToken;
+        return csrfToken;
+      } catch (error) {
+        console.error('Failed to get CSRF token:', error);
+        throw error;
+      }
+    }
+
+    getCSRFToken();
+
+    function updateCountdownDisplay(seconds) {
+      const minutes = Math.floor(seconds / 60);
+      const remainingSeconds = seconds % 60;
+      countdown.textContent = `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
+    }
+
+    function updateConnectionStatus(state) {
+      console.log('connection status:', state);
+    }
+
+    async function endSession(showUI = true) {
+      if (isTerminating || !currentSessionId) return;
+
+      isTerminating = true;
+
+      if (showUI) {
+        status.innerHTML = '<i class="fas fa-spinner loading-icon"></i> Ending session...';
+        status.style.display = "block";
+      }
+
+      if (hyperbeamInstance) {
+        try {
+          await hyperbeamInstance.destroy();
+          hyperbeamInstance = null;
+        } catch (error) {
+          console.error("Error destroying Hyperbeam instance:", error);
+        }
+      }
+
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3000);
+
+        if (!csrfToken) {
+          await getCSRFToken();
+        }
+
+        const response = await fetch(`${API_URL}/v0/vm/terminate`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-csrf-token": csrfToken
+          },
+          body: JSON.stringify({
+            sessionId: currentSessionId,
+          }),
+          signal: controller.signal
+        });
+
+        clearTimeout(timeoutId);
+
+        if (showUI) {
+          if (response.ok) {
+            status.innerHTML = '<i class="fas fa-check-circle"></i> Session ended';
+          } else {
+            status.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Session ended (cleanup may be delayed)';
+          }
+
+          setTimeout(() => {
+            status.style.display = "none";
+          }, 2000);
+        }
+
+      } catch (error) {
+        console.error("Error terminating session:", error);
+        if (showUI) {
+          status.innerHTML = '<i class="fas fa-times-circle"></i> Session ended (cleanup may be delayed)';
+          setTimeout(() => {
+            status.style.display = "none";
+          }, 2000);
+        }
+      }
+
+      resetSessionUI();
+      isTerminating = false;
+
+      getCSRFToken();
+    }
+
+    function resetSessionUI() {
+      currentSessionId = null;
+      hyperbeamContainer.innerHTML = '';
+      vmSessionContainer.style.display = "none";
+      createSessionBtn.style.display = "block";
+      createSessionBtn.disabled = false;
+      createSessionBtn.innerHTML = '<i class="fas fa-desktop"></i> Start Session';
+      countdown.style.color = "#4C75F2";
+      document.getElementById("introContainer").style.display = "flex";
+
+      if (countdownInterval) {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+      }
+    }
+
+    let isUnloading = false;
+
+    window.addEventListener("beforeunload", (e) => {
+      if (currentSessionId && !isTerminating && csrfToken) {
+        isUnloading = true;
+        const data = JSON.stringify({
+          sessionId: currentSessionId,
+          csrfToken: csrfToken
+        });
+
+        // meet "blob". he is a Blob with a type of application/json.
+        const blob = new Blob([data], { type: 'application/json' });
+        // he is important, not sure why, but, he is.
+        navigator.sendBeacon(`${API_URL}/v0/vm/terminate`, blob);
+      }
+    });
+
+    window.addEventListener("unload", (e) => {
+      if (currentSessionId && !isUnloading && csrfToken) {
+        const data = JSON.stringify({
+          sessionId: currentSessionId,
+          csrfToken: csrfToken
+        });
+
+        const blob = new Blob([data], { type: 'application/json' });
+        navigator.sendBeacon(`${API_URL}/v0/vm/terminate`, blob);
+      }
+    });
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden && currentSessionId && !isTerminating) {
+        // endSession(false);
+      }
+    });
+
+    endSessionBtn.addEventListener("click", () => {
+      endSession(true);
+    });
+
+    closeTabsBtn.addEventListener("click", async () => {
+      if (hyperbeamInstance && adminToken) {
+        try {
+          // LETS FIND THE TABS
+          const tabs = await hyperbeamInstance.tabs.query({});
+          console.log("Found tabs:", tabs);
+
+          // F$%# THE TABS, LETS DELETE THEM
+          const tabIds = tabs.map(tab => tab.id);
+          await hyperbeamInstance.tabs.remove(tabIds);
+          console.log("Closed all tabs:", tabIds);
+
+        } catch (error) {
+          console.error("Error closing tabs:", error);
+        }
+      } else {
+        console.log("No hyperbeam instance or admin token available");
+      }
+    });
+
+    createSessionBtn.addEventListener("click", async () => {
+      createSessionBtn.disabled = true;
+      createSessionBtn.innerHTML = '<i class="fas fa-circle-notch loading-icon"></i> Creating...';
+      status.style.display = "none";
+      document.getElementById("introContainer").style.display = "none";
+
+      try {
+        if (!csrfToken) {
+          await getCSRFToken();
+        }
+
+        const response = await fetch(`${API_URL}/v0/vm/create`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-csrf-token": csrfToken
+          },
+          body: JSON.stringify({})
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+          status.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + data.error;
+          status.style.display = "block";
+          createSessionBtn.disabled = false;
+          createSessionBtn.innerHTML = '<i class="fas fa-redo"></i> Try Again';
+          document.getElementById("introContainer").style.display = "flex";
+
+          await getCSRFToken();
+
+          setTimeout(() => {
+            status.style.display = "none";
+          }, 5000);
+          return;
+        }
+
+        const embedUrl = data.embed_url;
+        currentSessionId = data.session_id || embedUrl.split('/').pop();
+
+        // okay to the skids out there
+        // the admin token is NOT confidential
+        // its simply a "password" to control your vm's tabs
+        // since nobody can access your VM, it's not a "secret"
+        adminToken = data.admin_token;
+
+        hyperbeamContainer.innerHTML = '';
+        vmSessionContainer.style.display = "flex";
+
+        loadingOverlay.innerHTML = '<div class="loading-spinner"></div>One sec...';
+        loadingOverlay.style.display = "flex";
+
+        createSessionBtn.style.display = "none";
+
+        let timeLeft = 720;
+        updateCountdownDisplay(timeLeft);
+
+        //asdfasf          
+        setTimeout(() => {
+          loadingOverlay.style.display = "none";
+        }, 800);
+
+        try {
+          hyperbeamInstance = await Hyperbeam(hyperbeamContainer, embedUrl, {
+            timeout: 720,
+            volume: 0.8,
+            videoPaused: false,
+            delegateKeyboard: true,
+            adminToken: adminToken,
+
+            onConnectionStateChange: ({ state }) => {
+              console.log('Connection state:', state);
+              updateConnectionStatus(state);
+            },
+
+            onDisconnect: ({ type }) => {
+              console.log('Disconnected:', type);
+              if (type !== 'request') {
+                status.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Connection lost';
+                status.style.display = "block";
+                setTimeout(() => {
+                  endSession(false);
+                }, 2000);
+              }
+            },
+
+            onCloseWarning: ({ type, deadline }) => {
+              if (deadline) {
+                console.log(`${type} timeout warning: ${deadline.delay}ms remaining`);
+              }
+            }
+          });
+
+          console.log('hb init successful :)');
+
+        } catch (hyperbeamError) {
+          console.error("hb init failed >:(", hyperbeamError);
+          status.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Failed to connect to browser';
+          status.style.display = "block";
+          createSessionBtn.disabled = false;
+          createSessionBtn.innerHTML = '<i class="fas fa-desktop"></i> Start Session';
+          document.getElementById("introContainer").style.display = "flex";
+          vmSessionContainer.style.display = "none";
+
+          await getCSRFToken();
+
+          setTimeout(() => {
+            status.style.display = "none";
+          }, 5000);
+          return;
+        }
+
+        countdownInterval = setInterval(() => {
+          timeLeft--;
+          updateCountdownDisplay(timeLeft);
+
+          if (timeLeft <= 60) {
+            countdown.style.color = "#ff6b6b";
+          }
+
+          if (timeLeft <= 0) {
+            clearInterval(countdownInterval);
+            endSession(true);
+          }
+        }, 1000);
+
+      } catch (error) {
+        console.error("Error creating session:", error);
+        status.innerHTML = '<i class="fas fa-exclamation-triangle"></i> No sessions available';
+        status.style.display = "block";
+        createSessionBtn.disabled = false;
+        createSessionBtn.innerHTML = '<i class="fas fa-desktop"></i> Start Session';
+        document.getElementById("introContainer").style.display = "flex";
+
+        await getCSRFToken();
+
+        setTimeout(() => {
+          status.style.display = "none";
+        }, 5000);
+      }
+    });
+  </script>
+</body>
+
+</html>

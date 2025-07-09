@@ -1,0 +1,18 @@
+[
+    {
+      "id": "ai",
+      "name": "AI Chatbot",
+      "url": "https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3@main/page/apps/ai.html"
+    },
+    {
+      "id": "music",
+      "name": "Music",
+      "url": "https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3@main/page/apps/music.html"
+    },
+    {
+      "id": "emu",
+      "name": "Emulators",
+      "url": "https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3@main/page/apps/emu.html"
+    }
+  ]
+  

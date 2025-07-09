@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<!----------------------------!
+ ! nah securly you thought-
+ !----------------------------->
+<html lang="en">
+
+<head>
+
+
+  <script>
+    const splashTexts = [
+      "hold up im loading...",
+      "loading stuffs",
+      "im working on it",
+      "when v4???",
+      "loading 1 sec",
+      "be patient im loading",
+    ];
+
+    const randomIndex = Math.floor(Math.random() * splashTexts.length);
+    window.addEventListener("DOMContentLoaded", () => {
+      const textEl = document.getElementById("loader-text");
+      if (textEl) textEl.textContent = splashTexts[randomIndex];
+    });
+    window.addEventListener("load", () => {
+      const loader = document.getElementById("loader-overlay");
+      if (loader) {
+        loader.style.opacity = "0";
+        loader.style.transition = "opacity 0.27s ease";
+        setTimeout(() => loader.remove(), 1500);
+      }
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3.69@main/scripts/opt.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3@main/scripts/theme.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3.69@main/deliver.js"></script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VAP0R v3</title>
+
+  <link href="https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3@main/styles/defaults.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3@main/styles/index.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3@main/styles/sidebar.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3@main/_a/logo.new.png" type="image/x-icon" />
+
+  <!-- google analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TWLB9ZV0LR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+    gtag("config", "G-TWLB9ZV0LR");
+  </script>
+
+  <!-- SEO Meta -->
+  <meta name="title" content="VAP0R v3" />
+  <meta name="description"
+    content="VAPOR has over 400 games, speedy pr0xy, an entire Chrome + Android VM, movies, emulators, AI, and more." />
+  <meta name="keywords" content="games, pr0xy, vm, virtual machine, movies, emulators, ai, fun, unbl0ck, unbl0cked" />
+  <meta name="robots" content="index, follow" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="language" content="English" />
+  <meta name="revisit-after" content="7 days" />
+  <meta name="author" content="technonyte" />
+
+  <!-- Discord embed -->
+  <meta property="og:title" content="☄️ VAPOR v3" />
+  <meta name="theme-color" content="#49517c" />
+  <meta name="msapplication-TileColor" content="#49517c" />
+  <meta property="og:image" content="/_a/logo.png" />
+  <meta property="og:description" content="Your #1 destination for unblocking." />
+</head>
+
+<body>
+  <div id="loader-overlay">
+    <div style="display: flex; align-items: center; gap: 0.75rem">
+      <div class="loader-spinner"></div>
+      <div id="loader-text" style="font-size: 0.9rem; opacity: 1">...</div>
+    </div>
+  </div>
+
+  <nav class="sidebar">
+    <div class="nav-top" id="nav-items"></div>
+
+    <div class="nav-bottom">
+      <div class="quick-actions">
+        <a class="quick-action-btn"><i class="fa-brands fa-discord"></i></a>
+        <a class="quick-action-btn"><i class="fa-regular fa-coins"></i></a>
+        <a class="quick-action-btn"><i class="fa-regular fa-expand"></i></a>
+        <a class="quick-action-btn"><i class="fa-regular fa-handshake"></i></a>
+        <a class="quick-action-btn"><i class="fa-regular fa-cog"></i></a>
+      </div>
+
+      <a class="nav-item">
+        <div class="icon-container">
+          <img src="https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3@main/_a/logo.new.png" style="width: 30px" />
+        </div>
+        <span class="nav-text" style="margin-left: 18px">
+          VAPOR v3&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;<span id="commit-id">c0mm1t-</span>
+        </span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="overlay"></div>
+
+  <div class="content">
+    <iframe id="frame" src="https://raw.githack.com/gustambolopez/vaporv3/main/page/home.html"></iframe>
+  </div>
+
+  <div id="modal-overlay" class="modal-overlay"></div>
+  <div id="main-modal" class="main-modal">
+    <div class="modal-content">
+      <h2 class="modal-title">VAPOR 3.3</h2>
+      <p class="modal-body">
+        Major update! Here's whats new:
+        <br><br>
+        - New Customization settings
+        <br><br>
+        - Global bug fixes
+        <br><br>
+        - Minor css changes & fixes
+        <br><br>
+        - Settings page revamp
+        <br><br>
+        <small>thanks evicly :)</small>
+      </p>
+      <button id="modal-close" class="modal-button">fire</button>
+    </div>
+  </div>
+
+  <div id="donate-modal" class="main-modal">
+    <div class="modal-content">
+      <h2 class="modal-title">💸 Support VAPOR</h2>
+      <p class="modal-body">
+        If you enjoy VAPOR, consider donating to help server costs and adding
+        features!
+      </p>
+      <pre><code>BTC: bc1qxcuaahnaqgreahj0x42u29hcsuncgwaasvw94a</code></pre>
+      <button onclick="hideDonateModal()" class="modal-button">got it</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3@main/scripts/navi.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3@main/scripts/navigation.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3@main/scripts/commit.js"></script>
+
+  <script>
+    const MODAL_VERSION = "v3.3";
+    const modal = document.getElementById("main-modal");
+    const overlay = document.getElementById("modal-overlay");
+    const closeBtn = document.getElementById("modal-close");
+
+    function showModal() {
+      modal.classList.add("active");
+      overlay.classList.add("active");
+    }
+
+    function hideModal() {
+      modal.classList.remove("active");
+      overlay.classList.remove("active");
+    }
+
+    window.showModal = showModal;
+
+    closeBtn.addEventListener("click", () => {
+      localStorage.setItem("modalVersion", MODAL_VERSION);
+      hideModal();
+    });
+
+    window.addEventListener("load", () => {
+      const storedVersion = localStorage.getItem("modalVersion");
+      if (storedVersion !== MODAL_VERSION) {
+        showModal();
+      }
+    });
+  </script>
+  <script>
+    const donateModal = document.getElementById("donate-modal");
+
+    function showDonateModal() {
+      donateModal.classList.add("active");
+      document.getElementById("modal-overlay").classList.add("active");
+    }
+
+    function hideDonateModal() {
+      donateModal.classList.remove("active");
+      document.getElementById("modal-overlay").classList.remove("active");
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3@main/styles/defaults.css" />
+  <script src="https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3@main/scripts/theme.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
+      background: var(--bg-dark);
+      color: rgba(255, 255, 255, 0.8);
+      font-family: "Inter", sans-serif;
+    }
+
+    .content-container {
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      gap: 10px;
+    }
+
+    .content {
+      text-align: left;
+      opacity: 0;
+      transform: translateX(20px);
+      animation: zoomL 0.6s forwards 0.2s;
+    }
+
+    h1 {
+      margin: 0;
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 65px;
+    }
+
+    h1 span {
+      font-weight: 1000;
+      color: var(--text-color);
+    }
+
+    h1 span.title {
+      font-weight: 700;
+      background: linear-gradient(90deg,
+          transparent 0%,
+          transparent 20%,
+          #6366f1 80%,
+          #8fd7eb 100%);
+      background-size: 400% 100%;
+      background-position: -100% 0;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientSlide 2s ease-in-out forwards;
+    }
+
+    @keyframes gradientSlide {
+      0% {
+        background-position: 0% 0%;
+      }
+
+      100% {
+        background-position: 100% 0%;
+      }
+    }
+
+    .buttons-container {
+      margin-top: 5px;
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      padding-bottom: 10px;
+    }
+
+    .action-btn {
+      padding: 10px 14px;
+      border: none;
+      border-radius: 8px;
+      background-color: var(--button-bg);
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-family: "Inter", sans-serif;
+    }
+
+    .action-btn:hover {
+      background-color: var(--button-hover);
+    }
+
+    .whats-new-btn {
+      background-color: var(--button-bg);
+    }
+
+    .whats-new-btn:hover {
+      background-color: var(--button-hover);
+    }
+
+    img {
+      width: 300px;
+      transform: translateY(-15px);
+      opacity: 0;
+      animation: zoomR 0.8s forwards;
+    }
+
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      opacity: 0;
+      animation: fadeIn 1.5s ease forwards 0.5s;
+    }
+
+    i {
+      margin-right: 5px;
+    }
+
+    h1 {
+      pointer-events: none;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes zoomR {
+      0% {
+        transform: translateX(100%) scale(1);
+        opacity: 0;
+      }
+
+      100% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes zoomL {
+      0% {
+        opacity: 0;
+        transform: translateX(-25px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    iframe {
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 10px;
+        z-index: 10000;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="particles-js"></div>
+  
+  <script type="text/javascript">
+	atOptions = {
+		'key' : '18fea04b2213d1495bae8f24f92cd245',
+		'format' : 'iframe',
+		'height' : 90,
+		'width' : 728,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/18fea04b2213d1495bae8f24f92cd245/invoke.js"></script>
+
+  <div class="content-container">
+    <div class="content">
+      <h1><span class="title">VAPOR</span> <span>v3</span></h1>
+      <div class="buttons-container">
+        <button class="action-btn whats-new-btn" id="whats-new-btn">
+          <i class="fa-solid fa-megaphone"></i> What's New
+        </button>
+        <button class="action-btn" id="get-started-btn">
+          <i class="fa-brands fa-discord"></i> Our Discord
+        </button>
+      </div>
+    </div>
+    <img src="https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3@main/_a/logo.png" alt="Logo" />
+  </div>
+
+  <script>
+    particlesJS("particles-js", {
+      particles: {
+        number: {
+          value: 100,
+          density: {
+            enable: true,
+            value_area: 800,
+          },
+        },
+        color: {
+          value: "#ffffff",
+        },
+        shape: {
+          type: "circle",
+          stroke: {
+            width: 0,
+            color: "#000000",
+          },
+          polygon: {
+            nb_sides: 5,
+          },
+        },
+        opacity: {
+          value: 0.5,
+          random: true,
+          anim: {
+            enable: false,
+            speed: 1,
+            opacity_min: 0.1,
+            sync: false,
+          },
+        },
+        size: {
+          value: 2,
+          random: true,
+          anim: {
+            enable: false,
+            speed: 40,
+            size_min: 0.1,
+            sync: false,
+          },
+        },
+        line_linked: {
+          enable: true,
+          distance: 50,
+          color: "#ffffff",
+          opacity: 0.1,
+          width: 1,
+        },
+        move: {
+          enable: true,
+          speed: 1.5,
+          direction: "right",
+          random: true,
+          straight: true,
+          out_mode: "out",
+          bounce: false,
+          attract: {
+            enable: false,
+            rotateX: 600,
+            rotateY: 1200,
+          },
+        },
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: {
+            enable: false,
+            mode: "repulse",
+          },
+          onclick: {
+            enable: true,
+            mode: "push",
+          },
+          resize: true,
+        },
+        modes: {
+          grab: {
+            distance: 400,
+            line_linked: {
+              opacity: 1,
+            },
+          },
+          bubble: {
+            distance: 400,
+            size: 40,
+            duration: 2,
+            opacity: 8,
+            speed: 3,
+          },
+          repulse: {
+            distance: 200,
+            duration: 0.4,
+          },
+          push: {
+            particles_nb: 25,
+          },
+          remove: {
+            particles_nb: 2,
+          },
+        },
+      },
+      retina_detect: true,
+    });
+
+    // button event handlers
+    document.getElementById("whats-new-btn").addEventListener("click", () => {
+      if (window.parent && typeof window.parent.showModal === "function") {
+        window.parent.showModal();
+      } else {
+        console.warn("Modal function not found in parent.");
+      }
+    });
+
+    document
+      .getElementById("get-started-btn")
+      .addEventListener("click", () => {
+        window.open("https://dsc.gg/vaporr");
+      });
+  </script>
+</body>
+
+</html>

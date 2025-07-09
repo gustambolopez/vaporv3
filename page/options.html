@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3@main/styles/defaults.css" />
+  <script src="https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3@main/scripts/opt.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3@main/scripts/theme.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Inter", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    .sidebar {
+      width: 200px;
+      padding: 10px;
+      padding-top: 0px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .menu-item {
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 8px 12px;
+      border-radius: 14px;
+      color: var(--text-color);
+      cursor: pointer;
+      transition: 0.15s ease;
+    }
+
+    .menu-item:hover {
+      background-color: var(--secondary-bg);
+    }
+
+    .menu-item.active {
+      background-color: var(--third-bg);
+      color: var(--text-color);
+    }
+
+    .menu-item i {
+      width: 22px;
+      height: 22px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--text-color);
+    }
+
+    .content {
+      flex: 1;
+      margin-left: 20px;
+      padding-right: 20px;
+      display: none;
+      overflow-y: auto;
+    }
+
+    .content.active {
+      display: block;
+    }
+
+    .content h1 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .content p {
+      margin: 10px 0 20px;
+      color: var(--secondary-text-color);
+    }
+
+    /* button {
+      background-color: var(--fourth-bg);
+      border-radius: 14px;
+      margin-bottom: 20px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #9ca3af;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      gap: 10px;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background-color: var(--third-bg);
+    } */
+
+    .card {
+      background-color: var(--fourth-bg);
+      border-radius: 14px;
+      margin-bottom: 20px;
+      padding: 20px;
+      width: 450px;
+      color: var(--secondary-text-color);
+    }
+
+    .card h2 {
+      font-size: 18px;
+      margin: 0 0 8px;
+    }
+
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      color: #9ca3af;
+      cursor: pointer;
+      transition: 0.15s ease;
+    }
+
+    .option:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .server-notification {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      background-color: var(--fourth-bg);
+      color: #fff;
+      padding: 14px;
+      border-radius: 14px;
+      font-size: 16px;
+      display: none;
+      opacity: 0;
+      width: 275px;
+      transition: opacity 0.5s ease;
+    }
+
+    .server-notification.show {
+      display: block;
+      opacity: 1;
+    }
+
+    .toggle-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .toggle {
+      position: relative;
+      width: 50px;
+      height: 26px;
+      background-color: var(--button-bg);
+      border-radius: 13px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .toggle.active {
+      background-color: #4caf50;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 22px;
+      height: 22px;
+      background-color: white;
+      border-radius: 50%;
+      transition: transform 0.3s ease;
+    }
+
+    .toggle.active .toggle-slider {
+      transform: translateX(24px);
+    }
+
+    .input-container {
+      display: flex;
+      flex-direction: column;
+      margin-top: 10px;
+    }
+
+    .input-container label {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-bottom: 5px;
+      align-self: flex-start;
+    }
+
+    .input-container .input-row {
+      display: flex;
+      align-items: center;
+    }
+
+    .input-container input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 14px;
+      background-color: var(--secondary-bg);
+      color: #ffffff;
+      border: none;
+      outline: none;
+    }
+
+    .input-container button {
+      margin-left: 10px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 14px;
+      background-color: var(--secondary-bg);
+      color: #ffffff;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .input-container button:hover {
+      background-color: #4caf50;
+    }
+
+    select {
+      flex: 1;
+      padding: 10px;
+      border-radius: 14px;
+      background-color: var(--secondary-bg);
+      color: #ffffff;
+      border: none;
+      outline: none;
+    }
+
+    .custom-server-container {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .custom-server-container h3 {
+      margin: 0 0 10px;
+      font-size: 16px;
+      color: #ffffff;
+    }
+
+    .custom-server-container p {
+      margin: 0 0 10px;
+      font-size: 14px;
+      color: #9ca3af;
+    }
+
+    .custom-server-input {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .custom-server-input input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 14px;
+      background-color: var(--secondary-bg);
+      color: #ffffff;
+      border: none;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .custom-server-input button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 14px;
+      background-color: #4caf50;
+      color: #ffffff;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-size: 14px;
+    }
+
+    .custom-server-input button:hover {
+      background-color: #45a049;
+    }
+
+    .error-message {
+      color: #ff6b6b;
+      font-size: 12px;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .theme-select {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      background: #212630;
+      max-height: 250px;
+      margin-top: 0;
+      overflow-y: auto;
+      height: 0;
+      opacity: 0;
+      transition: height 0.5s ease-in-out, padding 0.5s ease-in-out, margin 0.5s ease-in-out;
+    }
+
+    .theme {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      padding: 10px;
+      border: 3px solid var(--secondary);
+      transition: 0.3s;
+    }
+
+    .theme:hover {
+      transform: scale(1.05);
+    }
+
+    .current-theme {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      transition: 0.3s;
+      padding: 10px;
+      border: 3px solid var(--secondary);
+      display: flex;
+      transition: height 0.5s ease-in-out;
+    }
+
+    .current-theme div {
+      flex: 1;
+    }
+
+    .current-theme button {
+      border: none;
+      background: var(--button-bg);
+      padding: 10px;
+      color: var(--text-color);
+      height: auto;
+      margin: 0;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .current-theme button:hover {
+      background: var(--button-hover);
+    }
+
+    .fancy {
+      background: linear-gradient(90deg,
+          #6365f1 0%,
+          #8fd7eb 25%,
+          #6366ff 50%,
+          #8fd7eb 75%,
+          #6366f1 100%);
+      background-size: 200% 100%;
+      background-position: 0% 0;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientSlide 3s ease-in-out forwards;
+    }
+
+    @keyframes gradientSlide {
+      0% {
+        background-position: 0% 0;
+      }
+
+      100% {
+        background-position: 100% 0;
+      }
+    }
+
+
+
+
+    /*themes*/
+
+    .theme-light {
+      border: 3px solid #444f60;
+      background: #d5dce8;
+      color: #444f60;
+      font-family: "Inter";
+      text-shadow: none;
+    }
+
+    .theme-light p {
+      color: #444f60;
+    }
+
+    .theme-amoled {
+      border: 3px solid #0a111d;
+      background: #000000;
+      color: #d5dce8;
+      font-family: "Inter";
+      text-shadow: none;
+    }
+
+    .theme-forest {
+      border: 3px solid #38a169;
+      background: #0d1b0d;
+      color: #38a169;
+      font-family: "Inter";
+      text-shadow: none;
+    }
+
+    .theme-forest p {
+      color: #38a169;
+    }
+
+    .theme-violet {
+      border: 3px solid #9f7aea;
+      background: #1a0b2e;
+      color: #9f7aea;
+      font-family: "Inter";
+      text-shadow: none;
+    }
+
+    .theme-violet p {
+      color: #9f7aea;
+    }
+
+    .theme-sunset {
+      border: 3px solid #ed8936;
+      background: #1a0f0a;
+      color: #ed8936;
+      font-family: "Inter";
+      text-shadow: none;
+    }
+
+    .theme-sunset p {
+      color: #ed8936;
+    }
+
+    .theme-ocean {
+      border: 3px solid #5fa8d3;
+      background: #0c1821;
+      color: #5fa8d3;
+      font-family: "Inter";
+      text-shadow: none;
+    }
+
+    .theme-ocean p {
+      color: #5fa8d3;
+    }
+
+    .theme-grayscale {
+      border: 3px solid #b0b0b0;
+      background: #0d0d0d;
+      color: #b0b0b0;
+      font-family: "Inter";
+      text-shadow: none;
+    }
+
+    .theme-grayscale p {
+      color: #b0b0b0;
+    }
+
+    .theme-matrix {
+      border: 3px solid #00ff00;
+      background: #000000;
+      color: #00ff00;
+      text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+      box-shadow: 0 0 10px #00ff00, 0 0 10px #00ff00 inset;
+    }
+
+    .theme-matrix * {
+      font-family: "Courier Prime", monospace;
+    }
+
+    .theme-matrix p {
+      color: #00ff00;
+    }
+
+    .disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .disabled:hover {
+      transform: scale(1);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <div class="menu-item active" data-target="about">
+        <i class="fa-regular fa-info-circle"></i>
+        About VAPOR
+      </div>
+      <div class="menu-item" data-target="prx">
+        <i class="fa-regular fa-ghost"></i>
+        Prøxy
+      </div>
+      <div class="menu-item" data-target="cloak">
+        <i class="fa-regular fa-hood-cloak"></i>
+        Cloaking
+      </div>
+      <div class="menu-item" data-target="customize">
+        <i class="fa-regular fa-palette"></i>
+        Customize <span class="redbadge">NEW</span>
+      </div>
+    </div>
+
+    <div class="content about active">
+      <div class="card">
+        <h1 class="fancy">About VAPOR</h1>
+        <p>
+          Where games, privacy, and more come together in a clean and
+          effortless experience. <br /><br />
+          technonyte0 - creator
+          <br />
+          Evicly - developer
+          <br />
+          mercuryworkshop - Ultraviolet + Wisp
+          <br />
+          3kh0 - most of the games
+          <br />Hyperbeam - Chromium VM <br />Vidsrc - most movies
+          <br />Google - Gemini AI <br />Emulatorjs - Emulator
+          <br />Javascript - being annoying
+        </p>
+      </div>
+    </div>
+
+    <div class="content prx">
+      <div class="card">
+        <h1 class="fancy">Prøxy Settings</h1>
+        <p>
+          Manage backends, features, and other prøxy related settings.
+        </p>
+      </div>
+      <div class="card">
+        <h2>Wisp Server</h2>
+        <p>
+          The backend that powers your browsing adventure.<br /><br />
+          Switching servers may resolve issues with the default server being
+          blocked. Also, if a server is down, choose another one from here.
+        </p>
+        <div class="option" data-wisp="wss://anura.pro/">
+          <i class="fa-regular fa-server"></i>
+          Default Server
+        </div>
+        <div class="option" data-wisp="wss://wisp.rhw.one">
+          <i class="fa-regular fa-server"></i>
+          RHW's Wisp
+        </div>
+        <div class="option" data-wisp="wss://aluu.xyz/wisp/">
+          <i class="fa-regular fa-server"></i>
+          Aluu (unreliable)
+        </div>
+
+        <div class="custom-server-container">
+          <h3>Custom Server</h3>
+          <p>Enter your own Wisp server URL (wss)</p>
+          <div class="custom-server-input">
+            <input type="text" id="customServerInput" placeholder="wss://anura.pro/" />
+            <button id="setCustomServer">Set Server</button>
+          </div>
+          <div class="error-message" id="customServerError">
+            Please enter a valid WSS URL (must start with wss://)
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Prøxy Games</h2>
+        <p>If certain games are blocked by your filter, try enabling this!</p>
+        <div class="toggle-container">
+          <span>Enable Prøxy Games</span>
+          <div class="toggle" id="prxGamesToggle">
+            <div class="toggle-slider"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content cloak">
+      <div class="card">
+        <h1 class="fancy">Cloaking Settings</h1>
+        <p>
+          Stay hidden with tab cloaking, about:blank pages, and more.
+        </p>
+      </div>
+      <div class="card">
+        <h2>about:blank (AB) Cloaking</h2>
+        <p>
+          Immediately open a "fake" browser tab with VAPOR in it. This causes
+          VAPOR to not be shown in your history, and is practically
+          undetectable. Make sure you allow popups in your browser!<br />
+        </p>
+        <div class="toggle-container">
+          <span>Enable AB Cloaking</span>
+          <div class="toggle" id="cloakToggle">
+            <div class="toggle-slider"></div>
+          </div>
+        </div>
+
+        <div class="input-container">
+          <label for="cloakUrl">Redirect URL:</label>
+          <div class="input-row">
+            <input type="text" id="cloakUrl" value="https://google.com" />
+            <button id="saveCloakUrl">
+              <i class="fa-regular fa-check"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Tab Cloaking</h2>
+        <p>Change the icon and title of the tab to a different site.</p>
+        <div class="input-container">
+          <label for="tabCloakPreset">Site:</label>
+          <div class="input-row">
+            <select id="tabCloakPreset" value="vapor">
+              <option value="vapor" selected>VAPOR (Default)</option>
+
+              <option disabled>━━━ Google Services ━━━</option>
+              <option value="google">Google</option>
+              <option value="gmail">Gmail</option>
+              <option value="google-docs">Google Docs</option>
+              <option value="google-sheets">Google Sheets</option>
+              <option value="google-slides">Google Slides</option>
+              <option value="google-drive">Google Drive</option>
+              <option value="google-classroom">Google Classroom</option>
+              <option value="youtube">YouTube</option>
+
+              <option disabled>━━━ Educational Platforms ━━━</option>
+              <option value="schoology">Schoology</option>
+              <option value="canvas">Canvas</option>
+              <option value="canva">Canva</option>
+              <option value="clever">Clever</option>
+              <option value="khan-academy">Khan Academy</option>
+              <option value="kahoot">Kahoot</option>
+              <option value="gimkit">Gimkit</option>
+              <option value="blooket">Blooket</option>
+
+              <option disabled>━━━ Common Sites ━━━</option>
+              <option value="github">GitHub</option>
+              <option value="wikipedia">Wikipedia</option>
+              <option value="stack-overflow">Stack Overflow</option>
+              <option value="microsoft">Microsoft</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Close Prevention</h2>
+        <p>Prevent the browser from closing VAPOR tabs.</p>
+        <div class="toggle-container">
+          <span>Enable Close Prevention</span>
+          <div class="toggle" id="closePreventToggle">
+            <div class="toggle-slider"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content customize">
+      <div class="card">
+        <h1 class="fancy">Customization Settings</h1>
+        <p>
+          Make VAPOR yours with personalization options.
+        </p>
+      </div>
+      <div class="card">
+        <h2>Theme</h2>
+        <p>Pick from tons of themes to customize VAPOR, or make your own.</p>
+        <div class="current-theme" id="currentTheme">
+          <div id="currentThemeData">
+            <h2>Hold on...</h2>
+            <p>Theme is loading...</p>
+          </div>
+          <button onclick="editTheme()"><i class="fa-regular fa-pencil"></i></button>
+        </div>
+        <div class="theme-select" id="themeSelect">
+        </div>
+      </div>
+      <div class="card">
+        <h2>Reduced Motion</h2>
+        <p>Reduce motion by disabling most animations.</p>
+        <div class="toggle-container">
+          <span>Reduced Motion</span>
+          <div class="toggle" id="reducedMotion">
+            <div class="toggle-slider"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="server-notification" id="serverNotification">
+    If server settings do not apply, try running CTRL+SHIFT+R.
+  </div>
+  <script>
+    const themes = [
+      {
+        name: "VAPOR (Default)",
+        desc: "The default VAPOR theme you know and love.",
+        value: "vapor"
+      },
+      {
+        name: "VAPOR Light",
+        desc: "Light mode for the weirdos out there.",
+        class: "theme-light",
+        value: "light"
+      },
+      {
+        name: "VAPOR Amoled",
+        desc: "A true amoled theme for VAPOR.",
+        class: "theme-amoled",
+        value: "amoled"
+      },
+      {
+        name: "Forest",
+        desc: "A calming forest-inspired theme with green tones.",
+        class: "theme-forest",
+        value: "forest"
+            },
+            {
+        name: "Violet",
+        desc: "A sleek purple theme with elegant vibes.",
+        class: "theme-violet",
+        value: "violet"
+            },
+            {
+        name: "Sunset",
+        desc: "Warm colors inspired by a sunset.",
+        class: "theme-sunset",
+        value: "sunset"
+            },
+            {
+        name: "Ocean",
+        desc: "Cool tones inspired by the ocean.",
+        class: "theme-ocean",
+        value: "ocean"
+            },
+            {
+        name: "Grayscale",
+        desc: "A minimalist grayscale theme.",
+        class: "theme-grayscale",
+        value: "grayscale"
+      },
+      {
+        name: "Matrix",
+        desc: "A green and black terminal theme inspired by the Matrix.",
+        class: "theme-matrix",
+        value: "matrix"
+      },
+      {
+        name: "Custom Theme",
+        desc: "Custom themes are under development. Please try again later", //Create your one theme with the VAPOR Theme Editor.
+        class: "disabled",
+        value: "custom",
+        disabled: true
+      }
+    ]
+    const themeSelect = document.getElementById("themeSelect");
+    const currentThemeDiv = document.getElementById("currentTheme");
+    let currentTheme = themes.find((t) => t.value == (localStorage.getItem("theme") || "vapor"));
+    let themeHTML = "";
+    let editingTheme = false;
+    themes.forEach((theme) => {
+      themeHTML += `
+      <div class="theme ${theme.class || ""}" onclick="setTheme('${theme.value || ""}')">
+        <h2>${theme.name}</h2>
+        <p>${theme.desc}</p>
+      </div>
+      `;
+    });
+    themeSelect.innerHTML = themeHTML;
+    currentThemeDiv.classList.add(currentTheme.value || "");
+    document.getElementById("currentThemeData").innerHTML = `
+      <h2>${currentTheme.name}</h2>
+      <p>${currentTheme.desc}</p>
+    `;
+    function editTheme() {
+      themeSelect.style.opacity = 1;
+      themeSelect.style.height = "250px";
+      themeSelect.style.padding = "10px";
+      themeSelect.style.marginTop = "10px";
+    }
+    function setTheme(theme) {
+      let themeData = themes.find((t) => t.value == (theme || "vapor"));
+      if (themeData.disabled) {
+        return;
+      }
+      localStorage.setItem("theme", theme);
+      loadTheme(theme);
+      document.getElementById("currentThemeData").innerHTML = `
+      <h2>${themeData.name}</h2>
+      <p>${themeData.desc}</p>
+    `;
+      themeSelect.style.height = "0px";
+      themeSelect.style.padding = "0 10px";
+      themeSelect.style.marginTop = "0px";
+      setTimeout(() => {
+        themeSelect.style.opacity = 0;
+      }, 500);
+    }
+  </script>
+  <script>
+    if (localStorage.getItem("abCloak") === null) {
+      localStorage.setItem("abCloak", "true");
+    }
+
+    const menuItems = document.querySelectorAll(".menu-item");
+    const contentDivs = document.querySelectorAll(".content");
+    const options = document.querySelectorAll(".option");
+    const serverNotification = document.getElementById("serverNotification");
+    const cloakToggle = document.getElementById("cloakToggle");
+    const cloakUrlInput = document.getElementById("cloakUrl");
+    const saveCloakUrlButton = document.getElementById("saveCloakUrl");
+    const prxGamesToggle = document.getElementById("prxGamesToggle");
+    const closePreventToggle = document.getElementById("closePreventToggle");
+    const reducedMotionToggle = document.getElementById("reducedMotion");
+
+    const customServerInput = document.getElementById("customServerInput");
+    const setCustomServerButton = document.getElementById("setCustomServer");
+    const customServerError = document.getElementById("customServerError");
+    const tabCloakPreset = document.getElementById("tabCloakPreset");
+
+    function applyTabCloak(presetKey) {
+      const targetWindow = window.parent !== window ? window.parent : window;
+      const targetDocument = targetWindow.document;
+
+      if (!window.cloakPresets) {
+        console.error("cloakPresets not loaded yet");
+        return;
+      }
+
+      const preset = window.cloakPresets[presetKey];
+
+      if (presetKey === "vapor") {
+        targetDocument.title = "VAPOR";
+
+        const existingFavicon =
+          targetDocument.querySelector("link[rel*='icon']");
+        if (existingFavicon) {
+          existingFavicon.remove();
+        }
+
+        const defaultFavicon = targetDocument.createElement("link");
+        defaultFavicon.rel = "icon";
+        defaultFavicon.href = "/icon-192.png";
+        targetDocument.head.appendChild(defaultFavicon);
+        return;
+      }
+
+      if (!preset) {
+        return;
+      }
+
+      if (preset.title) {
+        targetDocument.title = preset.title;
+      }
+
+      if (preset.favicon) {
+        const existingFavicon =
+          targetDocument.querySelector("link[rel*='icon']");
+        if (existingFavicon) {
+          existingFavicon.remove();
+        }
+
+        const newFavicon = targetDocument.createElement("link");
+        newFavicon.rel = "icon";
+        newFavicon.href = preset.favicon;
+        targetDocument.head.appendChild(newFavicon);
+      }
+    }
+
+    setTimeout(() => {
+      const savedTabCloak = localStorage.getItem("tabCloak") || "vapor";
+      tabCloakPreset.value = savedTabCloak;
+
+      applyTabCloak(savedTabCloak);
+    }, 100);
+
+    tabCloakPreset.addEventListener("change", () => {
+      const selectedPreset = tabCloakPreset.value;
+      localStorage.setItem("tabCloak", selectedPreset);
+      applyTabCloak(selectedPreset);
+    });
+
+    const proxGame = localStorage.getItem("proxGame");
+    if (proxGame === "true") {
+      prxGamesToggle.classList.add("active");
+    }
+
+    prxGamesToggle.addEventListener("click", () => {
+      prxGamesToggle.classList.toggle("active");
+      const isEnabled = prxGamesToggle.classList.contains("active");
+      localStorage.setItem("proxGame", isEnabled);
+    });
+
+    if (localStorage.getItem("abCloak") === "true") {
+      cloakToggle.classList.add("active");
+    }
+
+    cloakToggle.addEventListener("click", () => {
+      cloakToggle.classList.toggle("active");
+      const isEnabled = cloakToggle.classList.contains("active");
+      localStorage.setItem("abCloak", isEnabled);
+    });
+
+    const closePrevent = localStorage.getItem("closePrevent");
+    if (closePrevent === "true") {
+      closePreventToggle.classList.add("active");
+    }
+
+    closePreventToggle.addEventListener("click", () => {
+      closePreventToggle.classList.toggle("active");
+      const isEnabled = closePreventToggle.classList.contains("active");
+      localStorage.setItem("closePrevent", isEnabled);
+    });
+
+    saveCloakUrlButton.addEventListener("click", () => {
+      const cloakUrl = cloakUrlInput.value;
+      localStorage.setItem("abCloakUrl", cloakUrl);
+      alert("ABCloak URL saved as " + cloakUrl);
+    });
+
+    function validateWisp(url) {
+      if (!url.startsWith("wss://")) {
+        return null;
+      }
+
+      if (!url.endsWith("/")) {
+        url += "/";
+      }
+
+      return url;
+    }
+
+    setCustomServerButton.addEventListener("click", () => {
+      const inputUrl = customServerInput.value.trim();
+      const validatedUrl = validateWisp(inputUrl);
+
+      if (!validatedUrl) {
+        customServerError.style.display = "block";
+        return;
+      }
+
+      customServerError.style.display = "none";
+
+      options.forEach((opt) => (opt.style.backgroundColor = ""));
+
+      localStorage.setItem("proxServer", validatedUrl);
+
+      serverNotification.textContent = `Custom server set: ${validatedUrl}`;
+      serverNotification.classList.add("show");
+      setTimeout(() => {
+        serverNotification.classList.remove("show");
+        serverNotification.textContent =
+          "If server settings do not apply, try running CTRL+SHIFT+R.";
+      }, 5000);
+
+      customServerInput.value = "";
+    });
+
+    customServerInput.addEventListener("input", () => {
+      customServerError.style.display = "none";
+    });
+
+    customServerInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        setCustomServerButton.click();
+      }
+    });
+
+    const reducedMotion = localStorage.getItem("reducedMotion");
+    if (reducedMotion === "true") {
+      reducedMotionToggle.classList.add("active");
+    }
+
+    reducedMotionToggle.addEventListener("click", () => {
+      reducedMotionToggle.classList.toggle("active");
+      const isEnabled = reducedMotionToggle.classList.contains("active");
+      localStorage.setItem("reducedMotion", isEnabled);
+    });
+
+    menuItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        menuItems.forEach((menu) => menu.classList.remove("active"));
+        contentDivs.forEach((content) => content.classList.remove("active"));
+
+        item.classList.add("active");
+        const target = item.getAttribute("data-target");
+        document.querySelector(`.${target}`).classList.add("active");
+      });
+    });
+
+    options.forEach((option) => {
+      option.addEventListener("click", () => {
+        const wispUrl = option.getAttribute("data-wisp");
+        localStorage.setItem("proxServer", wispUrl);
+        options.forEach((opt) => (opt.style.backgroundColor = ""));
+        option.style.backgroundColor = "rgba(255,255,255,0.2)";
+        serverNotification.classList.add("show");
+        setTimeout(() => {
+          serverNotification.classList.remove("show");
+        }, 5000);
+      });
+    });
+  </script>
+</body>
+
+</html>

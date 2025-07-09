@@ -1,0 +1,98 @@
+[
+  {
+    "id": "vortex",
+    "name": "Vortex",
+    "url": "https://vortexos.net/",
+    "img": "https://vortexos.net/img/cover.png"
+  },
+  {
+    "id": "ubyis",
+    "name": "UBYIS",
+    "url": "https://ubyis.org/",
+    "img": "https://ubyis.org/img/logo.png"
+  },
+  {
+    "id": "gn-math",
+    "name": "gn-math",
+    "url": "https://gn-math.github.io/",
+    "img": "https://files.catbox.moe/6w9ild.png"
+  },
+  {
+    "id": "undergr0und",
+    "name": "undergr0und [unfinished]",
+    "url": "https://discord.gg/uFswSBNSYH",
+    "img": "https://cdn.discordapp.com/icons/1367614646433087580/9367c0274c8f956e279ef4c7afc48c4e.webp"
+  },
+  {
+    "id": "glseries",
+    "name": "GLSeriesDev",
+    "url": "https://glseries.net",
+    "img": "https://glseries.net/assets/img/essential/icon.ico"
+  },
+  {
+    "id": "ajh",
+    "name": "AJH's Vault",
+    "url": "https://edu.ajh.college/",
+    "img": "https://edu.ajh.college/icon.png"
+  },
+  {
+    "id": "lupinevault",
+    "name": "LupineVault",
+    "url": "https://lupinevault.com/",
+    "img": "https://i.ibb.co/nNbs5qBk/lupinepartner.png"
+  },
+  {
+    "id": "sunnys",
+    "name": "Sunny's Gym",
+    "url": "https://sunnysgym.shop/",
+    "img": "https://benrogo.net/partners/logos/sunnys_gym_240x240.webp"
+  },
+  {
+    "id": "catto",
+    "name": "Catto's Bypassing",
+    "url": "https://discord.gg/AhuFX35mhd",
+    "img": "https://cdn.discordapp.com/icons/1329941054207561768/b34c4843580919c26c4fb0c1605e9f66.webp"
+  },
+  {
+    "id": "cosmic",
+    "name": "Cosmic Network",
+    "url": "https://discord.gg/965A8QYa",
+    "img": "https://i.ibb.co/d0khtnk0/IMG-4053.webp"
+  },
+  {
+    "id": "uniub",
+    "name": "UniUB",
+    "url": "https://jobi.one",
+    "img": "https://jobi.one/images/logo/logo.png"
+  },
+  {
+    "id": "red",
+    "name": "RED By LupineVault",
+    "url": "https://lupine.red",
+    "img": "https://lupine.red/assets/img/favicon.ico"
+  },
+  {
+    "id": "obscura",
+    "name": "Obscura",
+    "url": "https://discord.com/invite/pYBmQTfbDh",
+    "img": "https://cdn.discordapp.com/icons/1322629666800140350/61c03135e41bcd641fc333b8fa70a076.webp"
+  },
+  {
+    "id": "electric",
+    "name": "Electric Network",
+    "url": "https://discord.com/invite/BJyUzhrbhw",
+    "img": "https://cdn.discordapp.com/icons/1353419057818374296/c0ce8580de05fef496124099da17a1a0.webp"
+  },
+  {
+    "id": "unblockzone",
+    "name": "Unblockzone",
+    "url": "https://unblockzone.online",
+    "img": "https://files.catbox.moe/ao6qv3.png"
+  },
+  {
+    "id": "lunar",
+    "name": "Lunar",
+    "url": "https://lunaron.top",
+    "img": "https://cdn.discordapp.com/icons/1278563314804195390/ae281c0ea7af2bbaf352ed86f719e456.webp"
+  }
+]
