@@ -388,9 +388,9 @@
     });
 
     scramjet.init();
-    navigator.serviceWorker.register("./sw.js");
+    navigator.serviceWorker.register("https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3.69@main/sw.js");
 
-    const connection = new BareMux.BareMuxConnection("/baremux/worker.js");
+    const connection = new BareMux.BareMuxConnection("https://cdn.jsdelivr.net/gh/gustambolopez/vaporv3.69@main/baremux/worker.js");
 
     const store = {
       url: "https://",
